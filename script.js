@@ -190,3 +190,56 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+// Handle touch events for sliders on mobile
+const productSlider = document.querySelector('.product-slider');
+if (productSlider) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    productSlider.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    productSlider.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+            // Swipe left - go to next slide
+            document.querySelector('.next-product').click();
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+            // Swipe right - go to previous slide
+            document.querySelector('.prev-product').click();
+        }
+    }
+}
+
+// Handle testimonial slider touch events
+const testimonialSlider = document.querySelector('.testimonial-slider');
+if (testimonialSlider) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    testimonialSlider.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    testimonialSlider.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleTestimonialSwipe();
+    }, false);
+    
+    function handleTestimonialSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+            // Swipe left - go to next testimonial
+            document.querySelector('.next-btn').click();
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+            // Swipe right - go to previous testimonial
+            document.querySelector('.prev-btn').click();
+        }
+    }
+}
